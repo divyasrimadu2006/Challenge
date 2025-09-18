@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agriculture Dashboard: Fertilizer & Pesticide Recommendations</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #eef2f3;
+            color: #333;
+        }
+
+        header {
+            background-color: #28a745;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        /* Dashboard Layout */
+        .dashboard-container {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 15px;
+            padding: 20px;
+            width: 350px;
+            text-align: center;
+        }
+
+        h3 {
+            color: #28a745;
+        }
+
+        .input-group {
+            margin-top: 20px;
+        }
+
+        select, input[type="number"] {
+            padding: 10px;
+            font-size: 16px;
+            margin-top: 10px;
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            background-color: #28a745;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #e53e3e;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Agriculture Dashboard</h1>
+        <p>Fertilizer and Pesticide Recommendation System</p>
+    </header>
+
+    <div class="dashboard-container">
+        <div class="card">
+            <h3>Fertilizer Recommendation</h3>
+            <p>Select Plant Type and Soil Condition:</p>
+            <div class="input-group">
+                <select id="plantSelect">
+                    <option value="tomato">Tomato</option>
+                    <option value="corn">Corn</option>
+                    <option value="wheat">Wheat</option>
+                    <option value="rice">Rice</option>
+                </select>
+                <select id="soilCondition">
+                    <option value="fertile">Fertile Soil</option>
+                    <option value="dry">Dry Soil</option>
+                    <option value="clay">Clay Soil</option>
+                </select>
+                <button onclick="getFertilizerRecommendation()">Get Fertilizer Recommendation</button>
+                <div id="fertilizerResult" class="result"></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Pesticide Recommendation</h3>
+            <p>Select Plant Type and Pest Severity:</p>
+            <div class="input-group">
+                <select id="pestPlantSelect">
+                    <option value="tomato">Tomato</option>
+                    <option value="corn">Corn</option>
+                    <option value="wheat">Wheat</option>
+                    <option value="rice">Rice</option>
+                </select>
+                <select id="pestSeverity">
+                    <option value="low">Low Pest Severity</option>
+                    <option value="medium">Medium Pest Severity</option>
+                    <option value="high">High Pest Severity</option>
+                </select>
+                <button onclick="getPesticideRecommendation()">Get Pesticide Recommendation</button>
+                <div id="pesticideResult" class="result"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 AgricultureTech | Powered by AI and Drone Technology</p>
+    </footer>
+
+    <script>
+        // Fertilizer Recommendation Function
+        function getFertilizerRecommendation() {
+            let plant = document.getElementById("plantSelect").value;
+            let soil = document.getElementById("soilCondition").value;
+            let recommendation = '';
+
+            if (plant === 'tomato') {
+                if (soil === 'fertile') {
+                    recommendation = 'Recommended Fertilizer: 20-10-10 (NPK) - 10 kg/acre';
+                } else if (soil === 'dry') {
+                    recommendation = 'Recommended Fertilizer: 15-10-5 (NPK) - 12 kg/acre';
+                } else {
+                    recommendation = 'Recommended Fertilizer: 10-10-10 (NPK) - 15 kg/acre';
+                }
+            } else if (plant === 'corn') {
+                if (soil === 'fertile') {
+                    recommendation = 'Recommended Fertilizer: 18-24-12 (NPK) - 15 kg/acre';
+                } else if (soil === 'dry') {
+                    recommendation = 'Recommended Fertilizer: 20-10-10 (NPK) - 12 kg/acre';
+                } else {
+                    recommendation = 'Recommended Fertilizer: 10-20-10 (NPK) - 18 kg/acre';
+                }
+            } else if (plant === 'wheat') {
+                recommendation = 'Recommended Fertilizer: 12-24-12 (NPK) - 10 kg/acre';
+            } else if (plant === 'rice') {
+                recommendation = 'Recommended Fertilizer: 20-10-10 (NPK) - 8 kg/acre';
+            }
+
+            // Display the result
+            document.getElementById("fertilizerResult").innerText = recommendation;
+        }
+
+        // Pesticide Recommendation Function
+        function getPesticideRecommendation() {
+            let plant = document.getElementById("pestPlantSelect").value;
+            let severity = document.getElementById("pestSeverity").value;
+            let recommendation = '';
+
+            if (plant === 'tomato') {
+                if (severity === 'low') {
+                    recommendation = 'Recommended Pesticide: Neem Oil (1.5%) - 2 liters/acre';
+                } else if (severity === 'medium') {
+                    recommendation = 'Recommended Pesticide: Pyrethrin - 3 liters/acre';
+                } else {
+                    recommendation = 'Recommended Pesticide: Chlorpyrifos - 5 liters/acre';
+                }
+            } else if (plant === 'corn') {
+                if (severity === 'low') {
+                    recommendation = 'Recommended Pesticide: Bacillus thuringiensis - 2 liters/acre';
+                } else if (severity === 'medium') {
+                    recommendation = 'Recommended Pesticide: Imidacloprid - 3 liters/acre';
+                } else {
+                    recommendation = 'Recommended Pesticide: Malathion - 4 liters/acre';
+                }
+            } else if (plant === 'wheat') {
+                recommendation = 'Recommended Pesticide: Carbaryl - 2 liters/acre';
+            } else if (plant === 'rice') {
+                recommendation = 'Recommended Pesticide: Pyrethroid - 3 liters/acre';
+            }
+
+            // Display the result
+            document.getElementById("pesticideResult").innerText = recommendation;
+        }
+    </script>
+</body>
+</html>
